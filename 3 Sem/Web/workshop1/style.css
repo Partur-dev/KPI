@@ -1,0 +1,255 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --color-crust: #11111b;
+  --color-mantle: #181825;
+  --color-base: #1e1e2e;
+  --color-surface0: #313244;
+  --color-text: #cdd6f4;
+  --color-pink: #f5c2e7;
+  --color-mauve: #cba6f7;
+  --color-red: #f38ba8;
+  --color-maroon: #eba0ac;
+  --color-peach: #fab387;
+  --color-yellow: #f9e2af;
+  --color-green: #a6e3a1;
+  --color-teal: #94e2d5;
+  --color-sky: #89dceb;
+  --color-sapphire: #74c7ec;
+  --color-blue: #89b4fa;
+  --color-lavender: #b4befe;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+ul,
+ol {
+  list-style-position: outside;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+li {
+  margin-bottom: 0.5em;
+  padding-left: 0.5em;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+li:has(> ul),
+li:has(> ol) {
+  list-style-type: none;
+}
+
+li > ul,
+li > ol {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ul ul {
+  list-style-type: circle;
+}
+
+ul ul ul {
+  list-style-type: square;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+ol ol {
+  list-style-type: lower-alpha;
+}
+
+ol ol ol {
+  list-style-type: lower-roman;
+}
+
+kbd {
+  font-family: "Courier New", Courier, monospace;
+  background-color: var(--color-base);
+  border: 1px solid var(--color-surface0);
+  color: var(--color-text);
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.3rem;
+  font-size: 0.9rem;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: var(--color-crust);
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-pink);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    "i1 i1 i1 i1"
+    "i2 i3 i4 i5"
+    "i6 i6 i4 i5"
+    "i7 i7 i7 i7";
+  gap: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+
+  height: auto;
+  min-height: 100vh;
+
+  &.fixed {
+    @media (min-width: 600px) and (min-height: 900px) {
+      height: 100vh;
+    }
+  }
+}
+
+.grid-item {
+  border-radius: 1.5rem;
+  padding: 1rem;
+  background-color: var(--color-mantle);
+  border: 1px solid var(--color-base);
+  min-height: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  transition: opacity 0.5s ease-out;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-pink);
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.item-1 {
+  grid-area: i1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: none;
+
+  .big {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  #nav {
+    display: flex;
+    /* gap: 0.5rem; */
+
+    a {
+      padding: 0.5rem 1rem;
+    }
+  }
+}
+
+.item-2 {
+  grid-area: i2;
+}
+
+.item-3 {
+  grid-area: i3;
+}
+
+.item-4 {
+  grid-area: i4;
+}
+
+.item-5 {
+  grid-area: i5;
+}
+
+.item-6 {
+  grid-area: i6;
+}
+
+.item-7 {
+  grid-area: i7;
+  transition: none;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+
+  &.big {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows:
+      auto
+      minmax(0, 1fr)
+      minmax(0, 1fr)
+      minmax(0, 1fr)
+      minmax(0, 1fr)
+      auto
+      auto;
+    grid-template-areas:
+      "i1"
+      "i2"
+      "i3"
+      "i4"
+      "i5"
+      "i6"
+      "i7";
+    min-height: 100vh;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .item-2,
+  .item-3,
+  .item-4,
+  .item-5 {
+    min-height: 0;
+    overflow: auto;
+  }
+
+  .grid-item {
+    padding: 0.75rem;
+  }
+}
