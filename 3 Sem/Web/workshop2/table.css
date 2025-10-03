@@ -1,0 +1,34 @@
+.container {
+  padding: 0;
+}
+
+.layout {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 1rem;
+}
+
+.layout td {
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+.layout td {
+  height: 100%;
+}
+
+.item-1 > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.item-1 #nav {
+  display: contents;
+}
+
+.item-1 #nav * {
+  padding: 0.5rem 1rem;
+  float: right;
+  vertical-align: middle;
+}
