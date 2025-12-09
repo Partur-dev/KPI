@@ -1,0 +1,15 @@
+R1: Central Station, Market, Airport
+R2: University, Theatre, Mall
+R3: City Hall, North Station
+R4: Depot, Hospital
+R5: Park, Zoo
+R6: Central Station, Stadium
+R7: Airport, Theatre
+R8: Hospital, Harbor
+R9: City Hall, Depot
+R10: North Station, Old Town
+R11: South Station, Park
+R12: Theatre, University
+R13: Zoo, Market
+R14: Mall, Central Station
+R15: Stadium, Airport
