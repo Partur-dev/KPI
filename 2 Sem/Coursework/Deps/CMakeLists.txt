@@ -1,0 +1,8 @@
+include(FetchContent)
+include(spdlog.cmake)
+include(glfw.cmake)
+include(imgui.cmake)
+include(glm.cmake)
+include(cgltf.cmake)
+include(stb_image.cmake)
+include(glad.cmake)
