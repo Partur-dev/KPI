@@ -1,0 +1,30 @@
+{
+  "name": "labs-nodejs-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kpi-dutov-ivan-andriyovych/labs-nodejs-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kpi-dutov-ivan-andriyovych/labs-nodejs-2/issues"
+  },
+  "homepage": "https://github.com/kpi-dutov-ivan-andriyovych/labs-nodejs-2#readme",
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.13"
+  }
+}

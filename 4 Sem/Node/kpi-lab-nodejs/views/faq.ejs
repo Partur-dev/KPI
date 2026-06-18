@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+</head>
+<body>
+    <h1>Відповіді на запитання в завданні 3</h1>
+    <ul>
+        <% faq.forEach((item) => { %>
+            <li>
+                <h2><%= item.question %></h2>
+                <p><%= item.answer %></p>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

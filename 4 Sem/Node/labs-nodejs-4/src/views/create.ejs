@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <title>New Task</title>
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <main>
+      <h1>New Task</h1>
+      <form action="/tasks" method="POST" class="form-card">
+        <div class="form-row">
+          <label for="title" class="form-label">Title</label>
+          <input
+            class="form-input"
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Conquer the TODO list (start here)"
+            autofocus
+            required
+          />
+        </div>
+
+        <div class="form-row">
+          <label for="date" class="form-label">Date</label>
+          <input
+            class="form-input"
+            type="date"
+            id="date"
+            name="date"
+            required
+          />
+        </div>
+
+        <div class="form-row">
+          <label for="priority" class="form-label">Priority</label>
+          <select class="form-select" id="priority" name="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn primary" type="submit">Create</button>
+          <a href="/" class="btn">Cancel</a>
+        </div>
+      </form>
+    </main>
+    <script>
+      // Auto-fill date input with today's date (YYYY-MM-DD) when creating a new task
+      document.addEventListener("DOMContentLoaded", function () {
+        try {
+          var dateEl = document.getElementById("date");
+          if (dateEl && !dateEl.value) {
+            var d = new Date();
+            var yyyy = d.getFullYear();
+            var mm = String(d.getMonth() + 1).padStart(2, "0");
+            var dd = String(d.getDate()).padStart(2, "0");
+            dateEl.value = yyyy + "-" + mm + "-" + dd;
+          }
+        } catch (e) {
+          // No-op if DOM access fails
+        }
+      });
+    </script>
+    <%- include('partials/footer') %>
+  </body>
+</html>

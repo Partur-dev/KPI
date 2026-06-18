@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm ci
+      - name: Run migrations (hypothetical)
+        run: npm run migrate:up
+      - name: Seed DB (hypothetical)
+        run: npm run seed
+        env:
+          DB_URL: ${{ secrets.DATABASE_URL }}
+      - name: Run tests
+        run: npm test

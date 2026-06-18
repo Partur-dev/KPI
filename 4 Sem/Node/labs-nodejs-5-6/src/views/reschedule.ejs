@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reschedule Overdue Tasks</title>
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Reschedule Overdue Tasks</h1>
+
+      <% if (error) { %>
+        <div class="alert-error">
+          <strong>Error:</strong> <%= error %>
+        </div>
+      <% } %>
+
+      <form action="/tasks/reschedule-overdue" method="POST" class="form-card">
+        <div class="form-row">
+          <label for="maxPerDay" class="form-label">Max tasks per day</label>
+          <input
+            class="form-input"
+            type="number"
+            id="maxPerDay"
+            name="maxPerDay"
+            min="1"
+            value="<%= values.maxPerDay %>"
+            required
+            autofocus
+          />
+        </div>
+
+        <div class="form-row">
+          <label for="windowDays" class="form-label">Planning window (days)</label>
+          <input
+            class="form-input"
+            type="number"
+            id="windowDays"
+            name="windowDays"
+            min="1"
+            value="<%= values.windowDays %>"
+            required
+          />
+        </div>
+
+        <div class="form-actions">
+          <button class="btn primary" type="submit">Reschedule</button>
+          <a href="/" class="btn">Cancel</a>
+        </div>
+      </form>
+    </main>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>

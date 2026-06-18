@@ -1,0 +1,274 @@
+@font-face {
+  font-family: "Geist";
+  /* noinspection CssUnknownTarget */
+  src: url("/fonts/geist/geist-sans/Geist-Regular.ttf") format("woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Geist";
+  /* noinspection CssUnknownTarget */
+  src: url("/fonts/geist/geist-sans/Geist-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+:root {
+  --bg: #000000;
+  --text: #ededed;
+  --accent: #fafafa;
+  --accent-glow: rgb(255, 255, 255, 0.1);
+  --border: #333333;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #fafafa;
+    --text: #171717;
+    --border: #eaeaea;
+    --accent: #000000;
+    --accent-glow: rgb(0, 0, 0, 0.1);
+  }
+}
+
+body {
+  font-family: "Geist", sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  max-width: 1080px;
+  margin: 3rem auto;
+  padding: 0 20px;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 50px;
+}
+
+nav a {
+  position: relative;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  font-family: "Geist Mono", monospace;
+  transition: color 0.2s ease;
+  padding: 5px 0;
+}
+
+nav a:hover {
+  color: var(--accent);
+}
+
+nav a.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--accent);
+  transition: width 0.2s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+nav a::before,
+nav a::after {
+  opacity: 0.5;
+}
+
+main {
+  padding-bottom: 3rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1.5rem 0 0.75rem;
+  font-weight: 700;
+}
+
+p {
+  line-height: 1.6;
+  margin: 0.75rem 0;
+}
+
+a {
+  color: var(--accent);
+}
+
+footer {
+  margin-top: 3rem;
+}
+
+.footer-divider {
+  border-color: var(--border);
+  margin: 3rem 0;
+}
+
+.footer-text {
+  margin: 0;
+}
+
+.footer-link {
+  color: var(--accent);
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+/* Task table */
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.task-table th,
+.task-table td {
+  text-align: left;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.task-table th {
+  font-weight: 700;
+  color: var(--text);
+  opacity: 0.6;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.task-table tr:last-child td {
+  border-bottom: none;
+}
+
+.row-done td {
+  opacity: 0.45;
+  text-decoration: line-through;
+  text-decoration-color: var(--border);
+}
+
+.row-done td:last-child {
+  text-decoration: none;
+}
+
+/* Priority badges */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-high {
+  background: #3f0d0d;
+  color: #ff6b6b;
+}
+.badge-medium {
+  background: #2e2000;
+  color: #f5a623;
+}
+.badge-low {
+  background: #0d1f0d;
+  color: #6bcb77;
+}
+
+@media (prefers-color-scheme: light) {
+  .badge-high {
+    background: #ffe0e0;
+    color: #c0392b;
+  }
+  .badge-medium {
+    background: #fff3cd;
+    color: #856404;
+  }
+  .badge-low {
+    background: #d4edda;
+    color: #155724;
+  }
+}
+
+/* Actions cell */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.actions form {
+  display: contents;
+}
+
+.actions a,
+.actions button {
+  font-family: "Geist", sans-serif;
+  font-size: 0.85rem;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.actions a:hover,
+.actions button:hover {
+  opacity: 0.6;
+}
+
+/* New task button */
+.btn {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/*Sort styles*/
+.sort-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  transition:
+    color 0.2s,
+    transform 0.1s;
+}
+
+.sort-link:hover {
+  color: var(--accent);
+  transform: translateY(-1px);
+}

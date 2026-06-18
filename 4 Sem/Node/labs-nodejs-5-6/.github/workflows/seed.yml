@@ -1,0 +1,35 @@
+name: Seed Database
+
+on:
+  workflow_dispatch:
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run seed in container
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          COOLIFY_APP_UUID: ${{ secrets.COOLIFY_APP_UUID }}
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          envs: COOLIFY_APP_UUID
+          command_timeout: 5m
+          script: |
+            set -e
+
+            CONTAINER_ID=$(docker ps \
+              --filter "label=coolify.name=${COOLIFY_APP_UUID}" \
+              --filter "status=running" \
+              --format "{{.ID}}" | head -1)
+
+            if [ -z "$CONTAINER_ID" ]; then
+              echo "No running container found for app ${COOLIFY_APP_UUID}."
+              exit 1
+            fi
+
+            echo "Running seed in container ${CONTAINER_ID}..."
+            docker exec "$CONTAINER_ID" npm run seed
+            echo "Done."

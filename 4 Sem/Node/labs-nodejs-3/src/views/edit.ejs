@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <%- include('partials/nav') %>
+    <main>
+      <h1>Edit Task</h1>
+      <form action="/tasks/<%= task.id %>?_method=PUT" method="POST">
+        <div>
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" value="<%= task.title %>" required />
+        </div>
+        <div>
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" value="<%= task.date %>" required />
+        </div>
+        <div>
+          <label for="priority">Priority</label>
+          <select id="priority" name="priority">
+            <option value="low" <%= task.priority === 'low' ? 'selected' : '' %>>Low</option>
+            <option value="medium" <%= task.priority === 'medium' ? 'selected' : '' %>>Medium</option>
+            <option value="high" <%= task.priority === 'high' ? 'selected' : '' %>>High</option>
+          </select>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="completed" value="true" <%= task.completed ? 'checked' : '' %> />
+            Completed
+          </label>
+        </div>
+        <button type="submit">Save</button>
+      </form>
+    </main>
+    <%- include('partials/footer') %>
+  </body>
+</html>

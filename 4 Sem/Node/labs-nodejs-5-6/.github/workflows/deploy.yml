@@ -1,0 +1,64 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Wait for Coolify deploy and run migrations
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          COOLIFY_APP_UUID: ${{ secrets.COOLIFY_APP_UUID }}
+          COMMIT_TIME: ${{ github.event.workflow_run.head_commit.timestamp }}
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          envs: COOLIFY_APP_UUID,COMMIT_TIME
+          command_timeout: 10m
+          script: |
+            set -e
+
+            # Convert commit timestamp to unix seconds so we can compare with container start time.
+            # Any container that started after the commit must be from this deployment.
+            COMMIT_TS=$(date -d "$COMMIT_TIME" +%s)
+            echo "Waiting for container started after $COMMIT_TIME..."
+
+            CONTAINER_ID=""
+            for i in $(seq 1 36); do
+              CID=$(docker ps \
+                --filter "label=coolify.name=${COOLIFY_APP_UUID}" \
+                --filter "status=running" \
+                --format "{{.ID}}" | head -1)
+
+              echo "DEBUG: CID=${CID}"
+              if [ -n "$CID" ]; then
+                STARTED_AT=$(docker inspect "$CID" \
+                  --format "{{.State.StartedAt}}" | xargs -I{} date -d {} +%s)
+
+                echo "DEBUG: STARTED_AT=${STARTED_AT} vs COMMIT_TS=${COMMIT_TS}"
+                if [ "$STARTED_AT" -gt "$COMMIT_TS" ]; then
+                  CONTAINER_ID="$CID"
+                  echo "Container $CONTAINER_ID is up."
+                  break
+                fi
+              fi
+
+              echo "[$i/36] Waiting..."
+              sleep 10
+            done
+
+            if [ -z "$CONTAINER_ID" ]; then
+              echo "Timed out waiting for new container. Is Coolify's git integration enabled for this app?"
+              exit 1
+            fi
+
+            echo "Running migrations in container $CONTAINER_ID..."
+            docker exec "$CONTAINER_ID" npm run migrate:up
+            echo "Done."

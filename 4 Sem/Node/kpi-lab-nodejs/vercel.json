@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "app.js": {
+      "includeFiles": "{public,views,data}/**"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/app.js"
+    }
+  ]
+}

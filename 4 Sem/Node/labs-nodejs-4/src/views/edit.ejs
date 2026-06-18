@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Edit Task</h1>
+      <form action="/tasks/<%= task.id %>/update" method="POST" class="form-card">
+        <div class="form-row">
+          <label for="title" class="form-label">Title</label>
+          <input
+            class="form-input"
+            type="text"
+            id="title"
+            name="title"
+            value="<%= task.title %>"
+            autofocus
+            required
+          />
+        </div>
+
+        <div class="form-row">
+          <label for="date" class="form-label">Date</label>
+          <input
+            class="form-input"
+            type="date"
+            id="date"
+            name="date"
+            value="<%= task.date %>"
+            required
+          />
+        </div>
+
+        <div class="form-row">
+          <label for="priority" class="form-label">Priority</label>
+          <select class="form-select" id="priority" name="priority">
+            <option value="low" <%= task.priority === 'low' ? 'selected' : '' %>>Low</option>
+            <option value="medium" <%= task.priority === 'medium' ? 'selected' : '' %>>Medium</option>
+            <option value="high" <%= task.priority === 'high' ? 'selected' : '' %>>High</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">
+            <input type="checkbox" name="completed" value="true" <%= task.completed ? 'checked' : '' %> />
+            Completed
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn primary" type="submit">Save</button>
+          <a href="/" class="btn">Cancel</a>
+        </div>
+      </form>
+    </main>
+    <script>
+      // Focus and select the full title on load so editing replaces the whole text
+      document.addEventListener('DOMContentLoaded', function () {
+        try {
+          var titleEl = document.getElementById('title');
+          if (titleEl) {
+            titleEl.focus();
+            if (typeof titleEl.select === 'function') titleEl.select();
+          }
+        } catch (e) {
+          // no-op
+        }
+      });
+    </script>
+    </main>
+    <%- include('partials/footer') %>
+  </body>
+</html>

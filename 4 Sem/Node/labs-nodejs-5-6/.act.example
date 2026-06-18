@@ -1,0 +1,7 @@
+# Next lines are for deploy reference and local testing with "act"
+VPS_HOST=127.0.0.1
+# Instead, use the `--secret` flag with `act`, because it doesn't support multiline secrets via `--secret-file`
+# VPS_SSH_KEY=secure-private-ssh-key
+VPS_USER=root
+
+COOLIFY_APPLICATION_UUID=app-uuid
